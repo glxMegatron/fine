@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Violations for {{ plate }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background: white;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2A68D4;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            background: #FFF;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+        a {
+            color: #2A68D4;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        strong {
+            color: #333;
+        }
+        button {
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #5cb85c;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #4cae4c;
+        }
+        .button-margin {
+        margin-right: 10px;
+    }
+    </style>
+</head>
+<body>
+    <h1>  Violations for Plate: {{ plate }}</h1>
+    {% if violations %}
+        <ul>
+            {% for violation in violations %}
+                <li>
+                    <strong> Date:</strong> {{ violation['Issue Date'] }}<br>
+                    <strong> Violation Description:</strong> {{ violation['Description'] }}<br>
+                    <strong> Amount Due:</strong> ${{ violation['Amount Due'] }}<br>
+                    <a href="{{ url_for('violation_detail', plate=plate, issue_date=violation['Issue Date'].replace('/', '-'), amount_due=violation['Amount Due']) }}">View Details</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No violations found.</p>
+    {% endif %}
+    <br>
+    <button onclick="window.location.href='{{ url_for('index') }}';">Return to Homepage</button>
+    <button onclick="history.back()">Return to Last Page</button>
+</body>
+</html>

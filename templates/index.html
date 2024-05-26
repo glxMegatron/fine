@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vehicle Violation Lookup</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            padding: 20px;
+            margin: 0;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        form {
+            max-width: 300px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #666;
+        }
+        input[type="text"] {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #5C6BC0;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #3f51b5;
+        }
+        
+        .or-divider {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .or-divider hr {
+            flex-grow: 1;
+            border: none;
+            border-top: 1px solid #ddd;
+        }
+
+        .or-divider p {
+            margin: 0 10px;
+            color: #666;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Welcome to the Vehicle Violation Lookup System</h1>
+    <form method="post" action="/">
+        <div>
+            <label for="plate">Enter Your License Plate Number:</label>
+            <input type="text" id="plate" name="plate" required>
+        </div>
+        
+        <button type="submit">Search by Plate</button>
+    </form>
+    
+    
+    <div class="or-divider">
+        <hr>
+        <p>or</p>
+        <hr>
+    </div>
+
+    <!-- Form for Summons Number -->
+    <form method="get" action="/view_by_summons">
+        <label for="summons">Enter Your Summons Number:</label>
+        <input type="text" id="summons" name="summons" required>
+        <button type="submit">Search by Summons</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Violation Detail</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            background-color: #fff;
+            margin: 20px auto;
+            padding: 20px;
+            width: 80%;
+            max-width: 800px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+        .detail {
+            background-color: #e7f4ff;
+            padding: 10px;
+            border-left: 4px solid #2b90d9;
+        }
+        .detail strong {
+            width: 150px;
+            display: inline-block;
+        }
+        .detail span {
+            font-weight: normal;
+        }
+        a {
+            text-decoration: none;
+            color: #2b90d9;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        button {
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #5cb85c;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #4cae4c;
+        }
+        .button-margin {
+        margin-right: 10px;
+    }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Violation Details for Plate: {{ violation['Plate'] }}</h1>
+        <ul>
+            <li class="detail"><strong>State:</strong> <span>{{ violation['State'] }}</span></li>
+            <li class="detail"><strong>License Type:</strong> <span>{{ violation['License Type'] }}</span></li>
+            <li class="detail"><strong>Summons Number:</strong> <span>{{ violation['Summons Number'] }}</span></li>
+            <li class="detail"><strong>Issue Date:</strong> <span>{{ violation['Issue Date'] }}</span></li>
+            <li class="detail"><strong>Violation Description:</strong> <span>{{ violation['Description'] }}</span></li>
+
+            <li class="detail"><strong>Fine Amount:</strong> <span>${{ violation['Fine Amount'] }}</span></li>
+            <li class="detail"><strong>Penalty Amount:</strong> <span>${{ violation['Penalty Amount'] }}</span></li>
+            <li class="detail"><strong>Interest Amount:</strong> <span>${{ violation['Interest Amount'] }}</span></li>
+            <li class="detail"><strong>Reduction Amount:</strong> <span>${{ violation['Reduction Amount'] }}</span></li>
+            <li class="detail"><strong>Payment Amount:</strong> <span>${{ violation['Payment Amount'] }}</span></li>
+            <li class="detail"><strong>Amount Due:</strong> <span>${{ violation['Amount Due'] }}</span></li>
+            
+            <li class="detail payment-input">
+
+                <form action="{{ url_for('show_payment_form') }}" method="get">
+                    <input type="hidden" name="plate" value="{{ plate }}">
+                    <input type="hidden" name="issue_date" value="{{ issue_date }}">
+                    <label for="amount-to-pay"><strong>Amount to Pay:</strong></label>
+                    <input type="number" id="amount-to-pay" name="amount_due" min="0.01" step="0.01" placeholder="Enter amount to pay" required>
+                    <button type="submit">Proceed to Payment</button>
+                </form>
+
+            </li>
+
+            <!-- Display the image or link if available -->
+            {% if violation['Summons Image'] %}
+                <li class="detail"><strong>Summons Image:</strong> <span><a href="{{ violation['Summons Image']['url'] }}" target="_blank">{{ violation['Summons Image']['description'] }}</a></span></li>
+            {% endif %}
+            
+
+        </ul>
+        <button onclick="window.location.href='{{ url_for('index') }}';">Return to Homepage</button>
+        <button onclick="history.back()">Return to Last Page</button>
+    </div>
+</body>
+</html>
